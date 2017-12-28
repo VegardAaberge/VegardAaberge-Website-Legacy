@@ -1,0 +1,322 @@
+$(document).ready(function() {
+	// Check if user is in session, if not login
+	if(sessionStorage.getItem("userdata")  !== null){
+		var userdata = JSON.parse(sessionStorage.userdata);
+		DisplayData(userdata);
+	}else{
+		$('#contact').modal('toggle');
+	};
+
+	// Check if password is correct
+	$('.submitPasswordButton').click(function(){
+		var username = $('#system_username').val();
+		var password = $('#system_password').val();
+
+		$.ajax({
+			type: "POST",
+			url: 'php/login.php',
+			data: {username: username, password: password},
+			
+			success: function (data) {
+				if(data == 'success'){
+					var userdata = [username, password];
+					sessionStorage.userdata = JSON.stringify(userdata);
+					
+					DisplayData(userdata);
+				}else{
+					alert('you typed in wrong username or password');
+				};
+			},
+			cache: false
+		});
+
+
+	})
+});
+
+
+
+function DisplayData(userdata){
+	// Check which page the user is on 
+	if(sessionStorage.getItem("ref") === null){
+		sessionStorage.ref = '#tab1';
+	}
+	var ref = sessionStorage.ref;
+
+	$('.tabs ' + ref).show().siblings().hide();
+	var index = ref.replace('#tab','');
+	$('.tab-links li').eq(index-1).addClass('active');
+
+	$('.tab-links a').on('click', function(e)  {
+		var ref = $(this).attr('href');
+		sessionStorage.ref = ref;
+		$('.tabs ' + ref).show().siblings().hide();
+		$(this).parent('li').addClass('active').siblings().removeClass('active');
+	});
+	
+
+	// Initialize all tables
+	dataCustomer(userdata);
+	dataAccessories(userdata);
+	dataDresses(userdata);
+	dataOrders(userdata);
+	dataOrdersacc(userdata);
+	dataBookings(userdata);
+
+	// Load the dresses inout boxes 
+	$.ajax({
+			type: "POST",
+			url: 'php/dataLoad.php',
+			data: {userdata: userdata},
+			
+			success: function (data) {				
+				var Data = JSON.parse(data);
+				
+				/////////////  Customer ///////////
+				for(j=1 ; j< 4 ; j++){
+					$('.dress_field' + j).html('<label for "wedding_dress"> Wedding Dress '+j+'</label>'+
+					'<select name="wedding_dress'+ j +'" id="wedding_dress'+ j +'"></select>');
+					
+					for(i=0 ; i< Data[1].length ; i++){
+						
+						var newOption = $('<option>');
+						newOption.attr('value', Data[0][i][0]).text(Data[0][i][1]);
+						
+						$('#wedding_dress' + j).append(newOption);   // append option to select list
+					}
+				}
+				
+				/////////// Orders ////////////////
+				$('.dress_field').html('<label for "wedding_dress"> Wedding Dress </label>'+
+				'<select name="dress" id="wedding_dress"></select>');
+					
+				for(i=0 ; i< Data[0].length ; i++){
+						
+					var newOption = $('<option>');
+					newOption.attr('value', Data[0][i][0]).text(Data[0][i][1]);
+					
+					$('#wedding_dress').append(newOption);   // append option to select list
+				}
+				/////////// Orders Accessory ////////////////
+				
+				$('.accessory_field').html('<label for "accessory"> Accessory Code </label>'+
+				'<select name="accessory" id="accessory"></select>');
+					
+				for(i=0 ; i< Data[1].length ; i++){
+						
+					var newOption = $('<option>');
+					newOption.attr('value', Data[1][i][0]).text(Data[1][i][1]);
+					
+					$('#accessory').append(newOption);   // append option to select list
+				}
+			},
+			cache: false
+		});
+
+	
+
+	///////// Order List ////////////
+	$(document).on('click', '.tableHeader', function(){ 
+		var typeID = sessionStorage.ref.replace('#tab','');
+		sessionStorage.setItem('order_name'+ typeID, $(this).attr('name'));
+
+		var searchOption = $('.searchOptions' + typeID).val();
+		var search_name = $($('#search' + typeID)).val().toLowerCase();
+
+		if(jQuery.trim(search_name) != ''){
+			showData(userdata, 'search', search_name, searchOption); // Dislay Data with search
+		}
+		else{
+			showData(userdata, 'default'); // Dislay Data
+		}
+	});
+
+
+	///////// Search Event ////////////
+	$('.search').keyup(function() {
+
+		var searchOption = $('.searchOptions' + (sessionStorage.ref).replace('#tab','')).val();
+		var search_name = $(this).val().toLowerCase();
+
+		if(jQuery.trim(search_name) != ''){
+			showData(userdata, 'search', search_name, searchOption); // Dislay Data with search
+		}
+		else{
+			showData(userdata, 'default'); // Dislay Data
+		}
+	});
+
+
+
+	///////////// Delete Event ///////////////
+	$(document).on('click', '.delete_button', function(){ 
+		var orderID = $(this).attr("name");
+		if(confirm('Are you sure you want to delete this user?')){			
+			
+			if(sessionStorage.ref == '#tab1'){
+				var id = $('.field' + orderID + ' .dataC1').attr('name');
+				var type = 'people';
+			}else if(sessionStorage.ref == '#tab2'){
+				var id = $('.field' + orderID + ' .dataO1').attr('name');
+				var type = 'orders';
+			}else if(sessionStorage.ref == '#tab3'){
+			}else if(sessionStorage.ref == '#tab4'){
+				var id = $('.field' + orderID + ' .dataD1').attr('name');
+				var type = 'dresses';
+			}else if(sessionStorage.ref == '#tab5'){
+				var id = $('.field' + orderID + ' .dataA1').attr('name');
+				var type = 'accessories';
+			}else if(sessionStorage.ref == '#tab6'){
+				var id = $('.field' + orderID + ' .dataB1').attr('name');
+				var type = 'bookings';
+			}
+
+			$.ajax({
+				type: "POST",
+				url: 'php/dataDelete.php',
+				data: {userdata: userdata, id: id, type: type},
+				
+				success: function (data) {
+					
+					showData(userdata, 'default'); // Dislay Data
+					
+				},
+
+				cache: false
+			});
+			
+		};
+		
+	});
+
+
+	//////////// Save Event ////////////////
+	$(document).on('click', '.save_button', function(){
+		var orderID = $(this).attr("name");
+		
+		var saveData = [];
+		if(sessionStorage.ref == '#tab1'){
+			var id = $('.field' + orderID + ' .dataC1').attr('name');
+			saveData[0] = $('.field' + orderID +' .dataC2 input').val();
+			saveData[1] = $('.field' + orderID +' .dataC3 input').val();
+			saveData[2] = $('.field' + orderID +' .dataC4 select').val();
+			saveData[3] = $('.field' + orderID +' .dataC5 select').val();
+			saveData[4] = $('.field' + orderID +' .dataC6 select').val();
+			saveData[5] = $('.field' + orderID +' .dataC7 textarea').val();
+			saveData[6] = $('.field' + orderID +' .dataC8 input').val();
+			var names = ['first_name', 'last_name', 'wedding_dress1', 'wedding_dress2', 'wedding_dress3', 'Information', 'created'];
+			var type = 'people';
+		}else if(sessionStorage.ref == '#tab2'){
+			var id = $('.field' + orderID + ' .dataO1').attr('name');
+			saveData[0] = $('.field' + orderID +' .dataO2 input').val();
+			saveData[1] = $('.field' + orderID +' .dataO3 input').val();
+			saveData[2] = $('.field' + orderID +' .dataO4 select').val();
+			saveData[3] = $('.field' + orderID +' .dataO5 input').val();
+			saveData[4] = $('.field' + orderID +' .dataO6 input').val();
+			saveData[5] = $('.field' + orderID +' .dataO7 input').val();
+			saveData[6] = $('.field' + orderID +' .dataO8 input').val();
+			saveData[7] = $('.field' + orderID +' .dataO9 input').val();
+			saveData[8] = $('.field' + orderID +' .dataO10 input').val();
+			var names = ['name','order_number','dress','import_price','sale_price','tracking','order_date','due_date','arrival_date'];
+			var type = 'orders';
+		}else if(sessionStorage.ref == '#tab3'){
+			var id = $('.field' + orderID + ' .dataOA1').attr('name');
+			saveData[0] = $('.field' + orderID +' .dataOA2 input').val();
+			saveData[1] = $('.field' + orderID +' .dataOA3 select').val();
+			saveData[2] = $('.field' + orderID +' .dataOA4 input').val();
+			saveData[3] = $('.field' + orderID +' .dataOA5 input').val();
+			saveData[4] = $('.field' + orderID +' .dataOA6 input').val();
+			var names = ['name','accessory','import_price','sale_price','order_date'];
+			var type = 'ordersacc';
+		}else if(sessionStorage.ref == '#tab4'){
+			var id = $('.field' + orderID + ' .dataD1').attr('name');
+			saveData[0] = $('.field' + orderID +' .dataD2 input').val();
+			saveData[1] = $('.field' + orderID +' .dataD3 input').val();
+			saveData[2] = $('.field' + orderID +' .dataD4 input').val();
+			saveData[3] = $('.field' + orderID +' .dataD5 input').val();
+			var names = ['name','dress_code','purchase_price','sale_price'];
+			var type = 'dresses';
+		}else if(sessionStorage.ref == '#tab5'){
+			var id = $('.field' + orderID + ' .dataA1').attr('name');
+			saveData[0] = $('.field' + orderID +' .dataA2 input').val();
+			saveData[1] = $('.field' + orderID +' .dataA3 input').val();
+			saveData[2] = $('.field' + orderID +' .dataA4 input').val();
+			saveData[3] = $('.field' + orderID +' .dataA5 input').val();
+			saveData[4] = $('.field' + orderID +' .dataA6 input').val();
+			var names = ['name','accessory_code','sale_price','purchase_price', 'stock'];
+			var type = 'accessories';
+		}else if(sessionStorage.ref == '#tab6'){
+			var id = $('.field' + orderID + ' .dataB1').attr('name');
+			saveData[0] = $('.field' + orderID +' .dataB2 input').val();
+			saveData[1] = $('.field' + orderID +' .dataB3 input').val();
+			saveData[2] = $('.field' + orderID +' .dataB4 input').val();
+			saveData[3] = $('.field' + orderID +' .dataB5 textarea').val();
+			saveData[4] = $('.field' + orderID +' .dataB6 input').val();
+			var names = ['name','phone_number', 'email','information', 'wedding_date'];
+			var type = 'bookings';
+		}
+
+		saveData = JSON.stringify(saveData);
+		
+		$.ajax({
+			type: "POST",
+			url: 'php/dataUpdate.php',
+			data: {userdata: userdata, data: saveData, names: names, type: type, id: id},
+			
+			success: function (data) {
+
+				showData(userdata, 'default');  // Dislay Data
+
+			},
+
+			cache: false
+		});
+		
+
+	});
+
+
+
+	///////////// Submit Event ///////////////
+	$('.submit_form').submit(function(e) {
+		e.preventDefault();
+
+		var typeID = sessionStorage.ref.replace('#tab','')
+		
+		var type = ['people', 'orders','ordersacc', 'dresses' , 'accessories', 'bookings'];
+		type = type[typeID-1];
+
+		var data = JSON.stringify($(this).serializeArray());
+
+		$.ajax({
+				type: "POST",
+				url: 'php/dataUpload.php',
+				data: {userdata: userdata, data: data, type: type},
+				
+				success: function (data) {
+					showData(userdata, 'default'); // Dislay Data
+				},
+
+			cache: false
+		});
+	});
+}
+
+function showData(userdata, showType, search_name, searchOption){
+	if(showType == 'default'){
+		if(sessionStorage.ref == '#tab1'){showData_customer(userdata)};
+		if(sessionStorage.ref == '#tab2'){showData_orders(userdata)};	
+		if(sessionStorage.ref == '#tab3'){showData_ordersacc(userdata)};	
+		if(sessionStorage.ref == '#tab4'){showData_dresses(userdata)};	
+		if(sessionStorage.ref == '#tab5'){showData_accessories(userdata)};
+		if(sessionStorage.ref == '#tab6'){showData_bookings(userdata)};
+	}else if(showType == 'search'){
+
+		if(sessionStorage.ref == '#tab1'){showData_customer(userdata, search_name)};
+		if(sessionStorage.ref == '#tab2'){showData_orders(userdata, search_name)};
+		if(sessionStorage.ref == '#tab3'){showData_ordersacc(userdata, search_name)};	
+		if(sessionStorage.ref == '#tab4'){showData_dresses(userdata, search_name, searchOption)};
+		if(sessionStorage.ref == '#tab5'){showData_accessories(userdata, search_name, searchOption)};
+		if(sessionStorage.ref == '#tab6'){showData_bookings(userdata, search_name)};
+	}
+}

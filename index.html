@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+	<meta charset="UTF-8">
+	<title>Vegard Aaberge</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="support/bootstrap.min.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand"> Vegard Aaberge Portefølje </a>
+
+				<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse" >
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul class ="nav navbar-nav navbar-right">
+					<li class="active"><a href="#">Prosjekter</a></li>
+					<li><a href="kompetanse.html">Kompetanse</a></li>
+					<li><a href="pdf/CV-vegard.pdf">CV</a></li>
+					<li class = "dropdown">
+						<a href="#" class="dropdowns-toggle" data-toggle="dropdown"> Attester <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="pdf/attest-vegard.pdf">Lundin</a></li>
+							<li><a href="pdf/anbefaling-vegard.pdf">Standard Profil</a></li>
+						</ul>
+					</li>
+					<li><a href="#contact" data-toggle="modal">Kontakt Vegard</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-10 col-lg-9 col-sm-8">
+				<div class="panel panel-default" id="article1">
+					<div class="panel-body"> 
+					 	<div class="page-header">
+							<h2>Black Oil Calculator <small>Laget for Lundin Norge</small></h2>
+							<div class="articleTopText">
+							  	<p><strong>Periode:</strong> jun 2015 - okt 2015</p>
+							  	<p><strong>Språk brukt:</strong> HTML, Javascript, CSS, Jquery, Jquery Mobile, PHP, MySQL</p>
+							</div>
+					 	</div>
+						<div class="articleText">
+							<p>Da jeg startet med dette programmet, hadde jeg mye kunnskap om hvordan man programmerer i C/C++, men visste lite om hvordan man lager nettsider. Jeg brukte ca 1 måned på å lære de forskjellige språkene og hvordan man bruker dem. Først så laget jeg kalkulatoren og lastefunksjonene, og så brukte jeg en del tid på kartet og strategrafi bildeserien. Til slutt la jeg til flere funksjoner på kartet og la til Norlex databasen. </p>
+							<br>
+							<h4>Kalkulatoren</h4>
+							Kalkulatoren ble laget med sliders for å gjøre det enkelt å gjøre kalkulasjoner. Resultatet blir da oppdatert i real time, slik at det er mulig å se hvordan hver faktor påvirker resultatet. Den husker også dataene slik at det er mulig å komme tilbake til de samme kalkulasjonene. Under other options er det mulig å laste inn data som er lagret på serveren. 
+
+							Dette var den første siden jeg laget, men fikk så en del oppdateringer iløpet av perioden. 
+
+							<div class="imageGroup imageGroup-2">
+							   <div class="row">
+								 	<div class="col-sm-6">
+										<div class="imageArea">
+											<img src="images/lundin/calculateOil.png" alt="Oljekalkulator">
+											<label>Oljekalkulator</label>
+										</div>
+									 </div>
+									 <div class="col-sm-6">
+										<div class="imageArea">
+										  	<img src="images/lundin/calculateGas.png" alt="Gaskalkulator">
+										  	<label>Gaskalkulator</label>
+										</div>
+								 	</div>
+							   </div>
+							</div>
+
+							<h4>Kartet</h4>
+
+							<p>Jeg startet med å lage kartet med polygoner, men etter å ha vist lisensene og oljefeltene, fant jeg ut at det var altfor tregt og fungerte ikke i det hele tatt på apple produkter. Jeg bestemte meg da for å bruke google fusion data istedenfor. Dataene er hentet fra  <a href="http://factpages.npd.no/ReportServer?/FactPages/geography/geography_all&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=1&CultureCode=nb-no">factpages</a> og så modifisert til mine formål og deretter lastet opp med <a href="http://shpescape.com/">shpescape</a></p>
+
+							<p>Etter å ha laget kart med google fusion data, så hentet jeg dataene med javascript, og brukte where filtre til å vise dataene som brukeren etterspurte. Brukeren kan styre hvilke filter han ønsker ved å bruke knappene. Bildekartene (gravitasjon, bathemetri, magnetisme) er laget med maptiler og så lagt til programmet. </p>
+
+							<div class="imageGroup imageGroup-3">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/lundin/mapNormal.png" alt="Normal Kart">
+											<label>Normal Kart</label>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/lundin/mapGeology.png" alt="Geologi Kart">
+											<label>Geologi Kart</label>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/lundin/mapBathemetry.png" alt="Bathemetri Kart">
+											<label>Bathemetri Kart</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<h4>Norlex</h4>
+							<p>Lundin Norge samarbeider med professoren Fredrik Gradstein. Han nevnte at det kunne være veldig praktisk å ha en mobilversjon av Norlex databasen. For øyeblikket så er Norlex databasen vanskelig å bruke på mobil. Utenom formasjonsdata tok jeg alle hans lister og underlister og gjorde dem om til Jquery Mobile datalister. Jeg linket til hans interaktive grafer, fordi de fungerte greit på mobilen. </p>
+
+							<p>Formasjonsdata kan vi se i bildet til høyre, og den var en viktig komponent som ikke fungerte spesielt godt på mobil. Jeg fikk dataene fra Øyvind Hammer og laget min egen MySQL database. Så bruke jeg sql queries til å hente de dataene som brukeren etterspurte. Lenkene er mulig å trykke på, og da vil den finne formasjonstopper for brønnen som er etterspurt.</p>
+
+							<div class="imageGroup imageGroup-2">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="imageArea">
+											<img src="images/lundin/norlex.png" alt="Norlex Hovedindeks">
+											<label>Norlex Hovedindeks</label>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="imageArea">
+											<img src="images/lundin/norlexFormations.png" alt="Norlex Formasjoner">
+											<label>Norlex Formasjoner</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<h4>Andre Funksjoner</h4>
+							<p>Det ble også laget en del enklere funksjoner som Lundin mente det var nyttig å ha. Jeg designet en strategrafi og datatabell bildeserie. Piltastene brukes til å gå frem og tilbake, og bruker Jquery mobile animasjoner. Sidene er kategorisert etter hashtag, og på den måten kan den vite hvilke side den skal gå til.</p>
+
+							<p>Jeg laget også muligheten til å gjøre forskjellige typer omregninger, laste inn data til kalkulatoren og jeg hadde en side hvor man kan finne nyttige kilder</p>
+
+							<div class="imageGroup imageGroup-2">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="imageArea">
+											<img src="images/lundin/strategrafi.png" alt="calculateOil">
+											<label>Strategrafi</label>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="imageArea">
+											<img src="images/lundin/datatables.png" alt="calculateGas">
+											<label>Datatabeller</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="imageGroup imageGroup-2">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="imageArea">
+											<img src="images/lundin/conversions.png" alt="calculateGas">
+											<label>Konversjoner</label>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="imageArea">
+											<img src="images/lundin/loadData.png" alt="calculateGas">
+											<label>Laste inn data</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <br><br>
+
+				<div class="panel panel-default" id="article2">
+					<div class="panel-body">
+						<div class="page-header">
+							<h2>Maintenance Application <small>Laget for Rong Chuang Real Estate, Kina</small></h2>
+							<div class="articleTopText">
+								<p><strong>Periode:</strong> okt 2015 - des 2015</p>
+								<p><strong>Språk brukt:</strong> HTML, Javascript, SASS, Angular, Ionic, Cordova, PHP, MySQL</p>
+								<p><strong>Github:</strong> <a href="https://github.com/VegardAaberge/Apartment_Service">https://github.com/VegardAaberge/Maintenance</a></p>
+								<p><strong>Google Play:</strong> <a href="https://play.google.com/store/apps/details?id=com.vegardaaberge.service.apartment">https://play.google.com/store/apps/details?id=com.vegardaaberge.service.apartment</a></p>
+							</div>
+						</div>
+
+						<div class="articleText">
+
+							<p>Rong Cuan driver med vedlikehold av leiligheter, og ønsker en mobilapp som vil gjøre det enklere for dem å gjøre deres arbeidsoppaver. Ideen er at en bruker laster opp en arbeidsoppgave og noen bilder fra mobilen, så fordeler en administrator arbeidsoppgavene til teknikere og teknikerene avslutter programmet ved å laste opp bilder som viser at prosjektet er ferdig. Dette vil være en kraftig forbedring fra deres papirsystem </p>
+
+							<p>Jeg startet prosjektet ved å sette opp MySQL databasen, og få den til å fungere med kinesiske tegn. Jeg lagde først deler av applikasjonen i Jquery Mobile, men fant ut det ville fungere best om jeg gjorde dem om til en SPA-applikasjon i Angular og Ionic.</p> 
+
+							<p> Som vist i bildet hovedmeny har appliasjonen 3 menyer, lag arbeidsoppgave, mine arbeidsoppgaver og tildelte arbeidsoppgaver. Lag arbeidsoppgave så skriver brukeren inn informasjon om prosjektet, og så laster opp relevante bilder til serveren. Mine arbeidsoppgaver så kan brukeren se statusen på arbeidsoppgavene han har laget, og tildelte arbeidsoppgaver viser oppgavene man skal fullføre og de man har fullført.</p>
+
+							<div class="imageGroup imageGroup-3">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/apartment/home.jpg" alt="Hjem">
+											<label>Hjem</label>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/apartment/create.jpg" alt="Lage Arbeidsoppgave">
+											<label>Lage arbeidsoppgave</label>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/apartment/image.jpg" alt="Laste opp bilder">
+											<label>Laste opp bilder</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="imageGroup imageGroup-3">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/apartment/tasks.jpg" alt="Arbeidsoppgaver">
+											<label>Arbeidsoppgaver</label>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/apartment/info1.jpg" alt="Info del 1">
+											<label>Info del 1</label>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="imageArea">
+											<img src="images/apartment/info2.jpg" alt="Info del 2">
+											<label>Info del 2</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<br>
+
+							<p>Administratoren har mulighet til å velge hvilke bruker som skal få tildelt arbeidsoppgaven. Når han har gitt arbeidsoppgaven til en tekniker, så vil teknikeren kunne se den under sine arbeidsoppgaver.</p>
+
+							<div class="imageGroup imageGroup-1">
+								<img class="featureImg" src="images/apartment/table.png" alt="image">
+								<label>Database arbeidsoppgaver</label>
+							</div>
+						</div>
+					</div>
+				</div> <br><br>  
+
+				<div class="panel panel-default" id="article3">
+				  <div class="panel panel-default" id="article2">
+						<div class="panel-body">
+							<div class="page-header">
+								<h2>Aaberge Brudesalong <small>Laget for Aaberge Brudesalong AS</small></h2>
+								<div class="articleTopText">
+									<p><strong>Periode:</strong> sep 2015 - des 2015</p>
+									<p><strong>Språk brukt:</strong> HTML, Javascript, SASS, Jquery, Ajax, Bootstrap, PHP, MySQL</p>
+									<p><strong>Github:</strong> <a href="https://github.com/VegardAaberge/Wedding_website">https://github.com/VegardAaberge/Wedding_website</a></p>
+									<p><strong>Nettside:</strong> <a href="http://aabergebrudesalong.no/">http://aabergebrudesalong.no/</a></p>
+									
+								</div>
+							</div>
+							
+							<div class="articleText">
+								<p>Min kone har startet en brudesalong og trengte en nettside og et databasesystem. Jeg startet å jobbe på nettsiden i september, da jeg ventet på at Lundin skulle gi meg noen bilder til faktakartet. Jeg startet med å lære MySQL, og så brukte dette til å lage et databasesystem. Da Lundins prosjekt var ferdig i starten av November, så fortsatte jeg å lage databasen og begynte å lage nettsiden.
+								</p>
+
+								<p>Når en bruker laster seg inn på siden, så ser de hovedsiden som vist under. Her kan kunden sende en melding, finne informasjon, og navigere seg til andre sider med topmenyen og bildene.</p>
+								
+								<div class="imageGroup imageGroup-1">
+									<img class="featureImg" src="images/brudesalong/index.jpg" alt="image">
+									<label>Hovedmeny</label>
+								</div>
+
+								<p>Bestillingskjemaet er koblet til Aaberge Brudesalong AS sin database. Når en kunde skriver inn sin informasjon og trykker på Bestill Time, så blir informasjonen sendt til Aaberge Brudesalong MySQL database. Hvis dette fungerer, så vil den sende en epost ut til kunden som bekrefter at hun har bestilt en time. Hvis kunden er på den engelske versjonen av siden, så vil den sende ut en melding på engelsk istedenfor. 
+
+								<div class="imageGroup imageGroup-1">
+									<img class="featureImg" src="images/brudesalong/bestill.png" alt="image">
+									<label>Bestille time</label>
+								</div>
+
+								<h3>Databasen</h3>
+								<p>Databasen ble laget fordi Aaberge Brudesalong AS trengte en database hvor de kan lagre informasjon. Grunnen til at jeg ikke brukte google docs, er fordi den skal kunne kommunisere med hovedsiden, og tabellene trenger å kommunisere med hverandre. </p>
+
+								<p>Denne databasen bruker mye PHP kode, som kommuniserer med MySQL. Det er mulig å redigere alle dataene, sortere dataene, slette dataene, og legge til nye data. Det er 6 faner med forskjellige tabeller. Når man velger å redusere eller legge til tilbehør og kjoler, så lager den en dropdownmeny basert på hva som er lagret under kjoler og tilbehør. For å logge inn, så trenger man å vite brukernavnet og passordet til MySQL databasen. For å øke sikkerheten så er loginformasjonen ikke lagret på serveren. </p>
+
+								<div class="imageGroup imageGroup-1">
+									<img class="featureImg" src="images/brudesalong/database.png" alt="image">
+									<label>Database login</label>
+								</div>
+								<div class="imageGroup imageGroup-1">
+									<img class="featureImg" src="images/brudesalong/database2.png" alt="image">
+									<label>Database kunder</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <br><br>
+
+				<div class="panel panel-default" id="article4">
+					<div class="panel-body">
+						<div class="page-header">
+							<h2>Black Oil Calculator (Labview) <small>Laget for Lundin Norge</small></h2>
+							<div class="articleTopText">
+								<p><strong>Periode:</strong> mar 2015 - jun 2015</p>
+								<p><strong>Programmer brukt:</strong> Labview</p>
+							</div>
+						</div>
+						<div class="articleText">
+							<p>Jeg startet å jobbe hos Lundin som en praksisarbeider. De hadde hørt at Labview gjør det lett å lage applikasjoner og ville ha meg til å lage en PC og en mobilapplikasjon. Jeg undersøkte og fant ut at det ikke var mulig å lage en ordentlig mobilapplikasjon, men det er mulig å lage en PC-versjon. Jeg startet dermed å lage en PC-versjon for Lundin</p>
+
+							<h4>Frontpanel</h4>
+
+							<p>Applikasjonen var delt i tre deler, en gjorde kalkulasjoner med data fra serveren, en gjorde kalkulasjoner med lokale data i txt eller json format, og en gjorde manuelle kalkulasjoner. For å komme inn i appen, så kreves det at man logger seg inn i systemet. Da har man muligheten til å gjøre kalkulasjoner med sine egne data, vise sine filer, slette filer og dele filer. Administrator har også muligheten til å lage og slette brukere. </p>
+
+							<div class="imageGroup imageGroup-1">
+								<img class="featureImg" src="images/labview/labview1.png" alt="image">
+								<label>Labview frontpanel</label>
+							</div>
+
+							<h4>Kart og Strategrafi</h4>
+							<p>Lundin ville også ha oversikt over firmaets lisenser og strategrafi. Jeg fikk strategrafi kartene til å fungere fint, men det ble for vanskelig å lage et fungerende google kart. Jeg tok derfor bilder av lisensene i google earth og gjorde det mulig å zoome og bare se på Lundin sine lisenser. Selv om dette fungerte greit, så ønsket de et mer komplisert kartsystem, og det var en av årsakene til at vi begynte å fokusere på HTML5 istedenfor.</p>
+
+							<div class="imageGroup imageGroup-1">
+								<img class="featureImg" src="images/labview/labview2.jpg" alt="image">
+								<label>Kart og Strategrafi</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				   
+			</div>
+
+
+			<nav class="col-xl-2 col-lg-3 col-sm-4" id="myScrollspy">
+				<ul class="nav nav-pills nav-stacked">
+				  	<li class="active">
+					 	<a href="#article1">
+							<h4 class="list-group-item-heading">Black Oil Calculator <small>Laget for Lundin Norge</small></h4> 
+							<p class="list-group-item-text">En nettsideapp som innholder en olje/gas kalkulator, stratigrafisk bildeserie, 
+							faktakart med mye data, Norlex database og noen flere funksjoner</p>
+					 	</a>
+				  </li>
+				  <li>
+					 	<a href="#article2">
+							<h4 class="list-group-item-heading">Maintenance Application <small>Laget for Rong Chuang Real Estate, Kina</small></h3>
+							<p class="list-group-item-text">Dette er en mobilapp laget med Angular og Ionic som kan administrere arbeidsoppgaver. <br> <br> Den kan lage, fullføre og administrere arbeidsoppgaver og laste opp bilder fra mobilen.</p>
+					 	</a>
+				  </li>
+				  <li>
+					 	<a href="#article3">
+							<h4 class="list-group-item-heading">Aaberge Brudesalong <small>Laget for Aaberge Brudesalong AS</small></h4>
+							<p class="list-group-item-text">En nettside som innholder informasjon om brudesalongen, brudesalongens kjoler og tilbehør og gir mulighet til å kontakte brudesalongen og bestille time. <br> <br> Laget også et databasesystem, som gjør det lett å lagre og modifisere informasjon om bestillingene og kundene.</p>
+						</a>
+				  </li>
+				  <li>
+					 	<a href="#article4">
+							<h4 class="list-group-item-heading">Black Oil Calculator (Labview) <small>Laget for Lundin Norge</small></h4>
+							<p class="list-group-item-text">En PC-applikasjon som kan gjøre oljekalkulasjoner med lokale og data fra en server, administrere filer og brukere og vise strategrafi og lisenser på et google earth kart</p>
+					 	</a>
+				  </li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+  
+	<div class="modal fade" id="contact" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="submitMessage" class="form-horizontal">
+						<div class="modal-header">
+							<h3>Kontakt Vegard Aaberge</h3>
+						</div>
+						<div class="modal-body">
+
+							<table class="infoContact">
+							  <tbody>
+							    <tr>
+							      <td class="thead"><strong>Mobil:</strong></td>
+							      <td>46 28 50 23</td>
+							    </tr>
+							    <tr>
+							      <td class="thead"><strong>E-post:</strong></td>
+							      <td>vegard.aaberge@gmail.com</td>
+							    </tr>
+							  </tbody>
+							</table>
+
+							<h3 style="font-size: 20px">Send Melding</h3>
+							<div class="form-group">
+								<label for="contact-name" class="col-sm-2 control-label"> Navn </label>
+								<div class="col-sm-10">
+									<input name="name" type="text" class="form-control" id="contact-name" placeholder ="Ditt navn">
+								</div>
+
+								<label for="contact-name" class="col-sm-2 control-label"> E-post: </label>
+								<div class="col-sm-10">
+									<input name="email" type="email" class="form-control" id="contact-email" placeholder ="deg@eksempel.no">
+								</div>
+
+								<label for="contact-message" class="col-sm-2 control-label"> Melding </label>
+								<div class="col-sm-10" >
+									<textarea name="message" class="form-control"rows="6" placeholder ="Skriv inn din melding"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a class="btn btn-default" data-dismiss="modal">Lukk</a>
+							<button class="btn btn-primary" type="submit">Send Melding</a>
+						</div>
+					</form>
+				</div>
+			</div>
+	</div>
+  
+	<script type="text/javascript" src="support/jquery.js"></script>
+	<script type="text/javascript" src="support/bootstrap.js"></script>
+	<script type="text/javascript" src="support/ajax-loading.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>       

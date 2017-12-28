@@ -1,0 +1,128 @@
+body {
+	position: relative;
+	font-size: 170%;
+	padding-top: 40px;
+	margin-bottom: 80px;
+}
+@media (max-width: 768px) {
+	.nav-pills{
+		visibility: hidden;
+	}
+}
+ul.nav-pills {
+	top: 20px;
+	position: fixed;
+}
+div.col-sm-9 div {
+	font-size: 28px;
+}
+
+@media screen and (max-width: 810px) {
+	#section1, #section2, #section3, #section4{
+    	margin-left: 150px;
+	}
+}
+
+.nav-pills{
+	max-width: 300px;
+	top: 70px !important;
+}
+
+.nav-pills li{
+	padding: 5px;
+	border-bottom: 1px solid #C0C0C0;
+
+}
+
+.page-header{
+border-bottom: 1px solid #e0e0e0;
+}
+
+.panel-body{
+	margin-bottom: 20px;
+}
+
+
+.panel-body{
+	padding-top: 0;
+}
+.featureImg{
+	margin-bottom:  15px;
+}
+.list-group{
+	padding-top: 20px;
+}
+.list-group-item-text{
+	font-size: 14px;
+}
+
+.articleText{
+	font-size: 16px;
+}
+.articleTopText{
+	font-size: 14px;
+}
+
+/*Image Area */
+.imageGroup{
+	margin: 20px auto;
+}
+.imageGroup img{
+	width: 100%;
+}
+
+.imageGroup label{
+	text-align: center;
+	width: 100%;
+	margin-top: 2%;
+	font-style: italic;
+}
+.imageGroup-1{
+	width: 95%;
+}
+
+.imageGroup-2{
+	width: 70%;
+}
+
+
+.imageGroup-3{
+	width: 90%;
+}
+
+
+@media (min-width: 1500px) {
+	.col-xl-1{
+		width: 8.3% !important;
+	}
+	.col-xl-2{
+		width: 16.6% !important;
+	}
+	.col-xl-3{
+		width: 25% !important;
+	}
+	.col-xl-4{
+		width: 33.3% !important;
+	}
+	.col-xl-5{
+		width: 41.6% !important;
+	}
+	.col-xl-6{
+		width: 50% !important;
+	}
+	.col-xl-7{
+		width: 58.3% !important;
+	}
+	.col-xl-8{
+		width: 66.6% !important;
+	}
+	.col-xl-9{
+		width: 75% !important;
+	}
+	.col-xl-10{
+		width: 83.3% !important;
+	}
+	.col-xl-11{
+		width: 91.6% !important;
+	}
+}	

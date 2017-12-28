@@ -1,0 +1,13 @@
+.box{
+	padding: 10px;
+}
+
+.voicebox{
+	padding: 10px;
+}
+
+.voicebox input, .voicebox select{
+	padding: 2px;
+	margin: 0 2px;
+	font-size: 17px;
+}
